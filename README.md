@@ -10,19 +10,7 @@ Frontend: HTML/CSS
 
 Problem: Multi-class classification of crop diseases from leaf images.
 
-📂 Project Structure
-graphql
-Copy
-Edit
-Crop-Disease-Classification/
-│
-├── static/               # Static files (CSS, images)
-├── templates/            # HTML templates
-├── model/                # Trained PyTorch model files
-├── app.py                # Flask backend
-├── model_training.ipynb  # Jupyter Notebook for model development
-├── requirements.txt      # Required Python packages
-└── README.md             # Project documentation
+
 🛠️ Features
 Image Upload: Upload an image of a crop leaf.
 
