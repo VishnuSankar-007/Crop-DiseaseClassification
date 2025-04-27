@@ -1,0 +1,72 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.container {
+    max-width: 600px;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s ease;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #e64a19;
+    transform: scale(1.05);
+}
+
+video {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.preview-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+#result {
+    font-size: 20px;
+    color: #333;
+    margin-top: 20px;
+    font-weight: bold;
+}

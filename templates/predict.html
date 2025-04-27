@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Disease Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Plant Disease Classification</h1>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="fileInput" name="file" accept="image/*">
+            <button type="submit">Predict</button>
+        </form>
+        <button id="openCamera">Open Camera</button>
+        <video id="video" autoplay style="display:none;"></video>
+        <canvas id="canvas" style="display:none;"></canvas>
+        <button id="captureImage" style="display:none;">Capture</button>
+        <div id="imagePreview"></div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const captureButton = document.getElementById('captureImage');
+        const fileInput = document.getElementById('fileInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const uploadForm = document.getElementById('uploadForm');
+        const resultDiv = document.getElementById('result');
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.innerHTML = `<img src="${e.target.result}" alt="Uploaded Image" class="preview-image">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('openCamera').addEventListener('click', function() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.style.display = 'block';
+                    captureButton.style.display = 'block';
+                    video.srcObject = stream;
+                })
+                .catch(err => console.error('Camera access denied:', err));
+        });
+
+        captureButton.addEventListener('click', function() {
+            const context = canvas.getContext('2d');
+            canvas.width = 256;
+            canvas.height = 256;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            video.srcObject.getTracks().forEach(track => track.stop());
+            video.style.display = 'none';
+            captureButton.style.display = 'none';
+            imagePreview.innerHTML = `<img src="${canvas.toDataURL()}" alt="Captured Image" class="preview-image">`;
+
+            canvas.toBlob(blob => {
+                const file = new File([blob], "captured_image.jpg", { type: "image/jpeg" });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
+            });
+        });
+
+        uploadForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = new FormData(uploadForm);
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            resultDiv.innerHTML = result.error ? `Error: ${result.error}` : `Prediction: ${result.prediction}`;
+        });
+    </script>
+</body>
+</html>
