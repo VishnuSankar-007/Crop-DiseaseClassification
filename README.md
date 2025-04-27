@@ -46,29 +46,6 @@ Model trained using Cross-Entropy Loss and Adam optimizer.
 
 Early Stopping used to prevent overtraining.
 
-⚙️ How to Run
-Clone the Repository
-
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/crop-disease-classification.git
-cd crop-disease-classification
-Install Dependencies
-
-nginx
-Copy
-Edit
-pip install -r requirements.txt
-Run Flask App
-
-nginx
-Copy
-Edit
-python app.py
-Open in Browser
-
-Visit http://127.0.0.1:5000/
 
 
 
