@@ -33,11 +33,11 @@ Confidence Score: Displays the prediction probability.
 User-friendly Interface: Simple and clean design.
 
 🧠 Model Details
-Architecture: Transfer Learning using ResNet18 (or specify if different)
+Architecture: Transfer Learning using CNN
 
-Dataset: (Mention the dataset name, e.g., PlantVillage or custom dataset)
+Dataset: PlantVillage 
 
-Accuracy Achieved: (Mention your final test accuracy, e.g., 92.5%)
+
 
 Training Steps
 Data Augmentation applied to prevent overfitting.
